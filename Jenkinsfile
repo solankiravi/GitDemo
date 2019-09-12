@@ -1,47 +1,24 @@
 pipeline {
     agent any
     stages {
-        stage('One') {
+        stage('Checkout') {
                 steps {
-                        echo 'Hi, this is Zulaikha from edureka'
+                        echo 'Hi, Checkout'
 			
                 }
         }
-	    stage('Two'){
+	    stage('Build'){
 		    
 		steps {
-			input('Do you want to proceed?')
+			echo "Hello, Build Completed"
         }
 	    }
-        stage('Three') {
-                when {
-                        not {
-                                branch "master"
-                        }
-                }
+        stage('Poll') {
+                
                 steps {
-			echo "Hello"
+			echo "Poll Successful"
                         }
         }
-        stage('Four') {
-                parallel {
-                        stage('Unit Test') {
-                                steps{
-                                        echo "Running the unit test..."
-                                }
-                        }
-                        stage('Integration test') {
-                        agent {
-                                docker {
-                                        reuseNode false
-					image 'ubuntu'
-                                        }
-			}
-				steps {
-					echo 'Running the integration test..'
-				}
-                               
-			}  }
-        }
+        
     }
 }
